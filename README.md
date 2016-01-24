@@ -1,4 +1,4 @@
-# GeoNames MySQL
+# Setting up a MySQL database from the GeoNames dumps
 Another simple MySQL script to build the GeoNames database, with an efficient structure and indexes, based on the exportable dump (http://download.geonames.org/export/dump/) and on the postal codes dump (http://download.geonames.org/export/zip/).
 
 ##  Download and unzip dumps
