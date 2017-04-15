@@ -2,6 +2,7 @@
 -- Lionel Villard
 -- 2017-04-15
 -- Set up table for all genames info
+-- Time : 5 min
 
 -- ---------------------------------------------------------------------------------
 -- download.geonames.org/export/dump/allCountries.zip
