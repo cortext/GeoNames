@@ -15,12 +15,11 @@ Download and unzip dumps
 ### Unsing zip/postal codes
 * download.geonames.org/export/zip/allCountries.zip
 Note that you are able to fin all the regular expressions to collect zip codes in the table 
-## Setup all festure classes
+## Setup all feature classes
 For those who need all the feature classes, you can download, unzip, and build a table with all geonames feature classes. Some of these information will be redondante with cities1000, cities5000 and cities15000.
 Pay attention, allcountry table:
 * store more thant 1.5 go of information
-* 
-
+* all feature classes are in it 
 ##  Excluded dumps
 * allCountries.zip (>300mo) but the table has the same structure than cities1000, cities5000 or cities15000;
 * alternateNames.zip (>100mo) alternative names for all the populated places (from allCountries.zip)
