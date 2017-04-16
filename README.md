@@ -23,6 +23,21 @@ GROUP BY a.fclass , a.fcode
 ORDER BY NbGeoNamesId DESC
 LIMIT 0,10;
 ```
+fclass | fcode | NbGeoNamesId | name
+--- | --- | --- | ---
+P | PPL | 69408 | populated place
+P | PPLA3 | 27195 | seat of a third-order administrative division
+P | PPLA4 | 26600 | seat of a fourth-order administrative division
+P | PPLA2 | 16160 | seat of a second-order administrative division
+P | PPLA | 3483 | seat of a first-order administrative division
+P | PPLX | 2336 | section of populated place
+P | PPLC | 242 | capital of a political entity
+P | PPLL | 239 | populated locality
+P | PPLQ | 19 | abandoned populated place
+P | PPLG | 14 | seat of government of a political entity
+
+
+
 * [download.geonames.org/export/dump/featureCodes_en.txt](http://download.geonames.org/export/dump/featureCodes_en.txt)
 * [download.geonames.org/export/dump/countryInfo.txt](http://download.geonames.org/export/dump/countryInfo.txt)
 * [download.geonames.org/export/dump/admin1CodesASCII.txt](http://download.geonames.org/export/dump/admin1CodesASCII.txt)
