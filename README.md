@@ -12,11 +12,11 @@ Download and unzip dumps according to your needs.
 All GeoNames information should be relevant or not for you. By using cities tables (instead of allCountries table), you will upload only feature classes that are at least a small village (to a large metropole as a capital) with information on the population.
 Data between this three table are redondante (cities in cities5000 are also in cities1000).
 
-* [download.geonames.org/export/dump/featureCodes_en.txt](http://download.geonames.org/export/dump/featureCodes_en.txt
-* [download.geonames.org/export/dump/countryInfo.txt](http://download.geonames.org/export/dump/countryInfo.txt
-* [download.geonames.org/export/dump/admin1CodesASCII.txt](http://
-* [download.geonames.org/export/dump/admin2Codes.txt](http://
-* [download.geonames.org/export/dump/hierarchy.zip](http://
+* [download.geonames.org/export/dump/featureCodes_en.txt](http://download.geonames.org/export/dump/featureCodes_en.txt)
+* [download.geonames.org/export/dump/countryInfo.txt](http://download.geonames.org/export/dump/countryInfo.txt)
+* [download.geonames.org/export/dump/admin1CodesASCII.txt](http://download.geonames.org/export/dump/admin1CodesASCII.txt)
+* [download.geonames.org/export/dump/admin2Codes.txt](http://download.geonames.org/export/dump/admin2Codes.txt)
+* [download.geonames.org/export/dump/hierarchy.zip](http://download.geonames.org/export/dump/hierarchy.zip)
 
 ### Unsing zip/postal codes
 * [download.geonames.org/export/zip/allCountries.zip
@@ -27,7 +27,7 @@ Note: you will find all the regular expressions to collect zip codes in the tabl
 
 ## Set up all feature classes
 For those who want all information, you can download, unzip, and build a table with all geonames feature classes. This table will have the same structure than cities1000, cities5000 and cities15000, and share some of information that are also listed in these three tables. 
-* [download.geonames.org/export/dump/allCountries.zip](http://
+* [download.geonames.org/export/dump/allCountries.zip](http://download.geonames.org/export/dump/allCountries.zip)
 
 Pay attention, allcountries table:
 * store more thant 1.5 go of information (without indexes)
