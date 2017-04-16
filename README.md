@@ -11,6 +11,8 @@ Download and unzip dumps according to your needs.
 
 All GeoNames information should be relevant or not for you. By using cities tables (instead of allCountries table), you will upload only feature classes that are at least a small village (to a large metropole as a capital) with information on the population.
 Data between this three table are redondante (cities in cities5000 are also in cities1000).
+
+**First 10 feature classes in the cities1000 table**
 ```sql
 SELECT 
     a.fclass, a.fcode, COUNT(a.geonameid) AS NbGeoNamesId, b.name
@@ -25,18 +27,16 @@ LIMIT 0,10;
 ```
 fclass | fcode | NbGeoNamesId | name
 --- | --- | --- | ---
-P | PPL | 69408 | populated place
-P | PPLA3 | 27195 | seat of a third-order administrative division
-P | PPLA4 | 26600 | seat of a fourth-order administrative division
-P | PPLA2 | 16160 | seat of a second-order administrative division
-P | PPLA | 3483 | seat of a first-order administrative division
-P | PPLX | 2336 | section of populated place
+P | PPL | 69 408 | populated place
+P | PPLA3 | 27 195 | seat of a third-order administrative division
+P | PPLA4 | 26 600 | seat of a fourth-order administrative division
+P | PPLA2 | 16 160 | seat of a second-order administrative division
+P | PPLA | 3 483 | seat of a first-order administrative division
+P | PPLX | 2 336 | section of populated place
 P | PPLC | 242 | capital of a political entity
 P | PPLL | 239 | populated locality
 P | PPLQ | 19 | abandoned populated place
 P | PPLG | 14 | seat of government of a political entity
-
-
 
 * [download.geonames.org/export/dump/featureCodes_en.txt](http://download.geonames.org/export/dump/featureCodes_en.txt)
 * [download.geonames.org/export/dump/countryInfo.txt](http://download.geonames.org/export/dump/countryInfo.txt)
@@ -55,8 +55,34 @@ Note: you will find all the regular expressions to collect zip codes in the tabl
 For those who want all information, you can download, unzip, and build a table with all geonames feature classes. This table will have the same structure than cities1000, cities5000 and cities15000, and share some of information that are also listed in these three tables. 
 * [download.geonames.org/export/dump/allCountries.zip](http://download.geonames.org/export/dump/allCountries.zip)
 
+**First 10 feature classes in the allcountries table**
+```sql
+SELECT 
+    a.fclass, a.fcode, COUNT(a.geonameid) AS NbGeoNamesId, b.name
+FROM
+    geo_allcountries AS a,
+    geo_featurecodes AS b
+WHERE
+    b.code = CONCAT(a.fclass, '.', a.fcode)
+GROUP BY a.fclass , a.fcode
+ORDER BY NbGeoNamesId DESC
+LIMIT 0,10;
+```
+fclass | fcode | NbGeoNamesId | name
+--- | --- | --- | ---
+P | PPL | 4 100 754 | populated place
+H | STM | 862 859 | stream
+T | MT | 391 873 | mountain
+T | HLL | 367 942 | hill
+S | FRM | 322 320 | farm
+S | SCH | 278 728 | school
+H | LK | 266 213 | lake
+S | CH | 246 672 | church
+S | HTL | 241 482 | hotel
+H | STMI | 200 196 | intermittent stream
+
 Pay attention, allcountries table:
 * store more thant 1.5 go of information (without indexes)
-* all feature classes are in it (with some uses, it can add a lot of false positives)
+* all feature classes are in it (for some uses, it can add a lot of false positives)
 ##  Excluded dumps
 * alternateNames.zip (>100mo) alternative names for all the populated places (from allCountries.zip)
