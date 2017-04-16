@@ -11,7 +11,18 @@ Download and unzip dumps according to your needs.
 
 All GeoNames information should be relevant or not for you. By using cities tables (instead of allCountries table), you will upload only feature classes that are at least a small village (to a large metropole as a capital) with information on the population.
 Data between this three table are redondante (cities in cities5000 are also in cities1000).
-
+```sql
+SELECT 
+    a.fclass, a.fcode, COUNT(a.geonameid) AS NbGeoNamesId, b.name
+FROM
+    geo_01cities1000 AS a,
+    geo_featurecodes AS b
+WHERE
+    b.code = CONCAT(a.fclass, '.', a.fcode)
+GROUP BY a.fclass , a.fcode
+ORDER BY NbGeoNamesId DESC
+LIMIT 0,10;
+```
 * [download.geonames.org/export/dump/featureCodes_en.txt](http://download.geonames.org/export/dump/featureCodes_en.txt)
 * [download.geonames.org/export/dump/countryInfo.txt](http://download.geonames.org/export/dump/countryInfo.txt)
 * [download.geonames.org/export/dump/admin1CodesASCII.txt](http://download.geonames.org/export/dump/admin1CodesASCII.txt)
@@ -19,7 +30,7 @@ Data between this three table are redondante (cities in cities5000 are also in c
 * [download.geonames.org/export/dump/hierarchy.zip](http://download.geonames.org/export/dump/hierarchy.zip)
 
 ### Unsing zip/postal codes
-* [download.geonames.org/export/zip/allCountries.zip
+* [download.geonames.org/export/zip/allCountries.zip](http://download.geonames.org/export/zip/allCountries.zip)
 
 Note: you will find all the regular expressions to collect zip codes in the table countryinfo in the two colomns: 
 * **postalCodeRegex** : list of all the detailled regular expressions by countries (if exists) to collect postal / zip codes
