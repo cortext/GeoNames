@@ -64,7 +64,7 @@ ALTER TABLE `geo_allcountries` DISABLE KEYS;
 -- INSERT Section
 -- 
 
-LOAD DATA LOCAL INFILE 'C:\\Doc\\Documents\\MesScripts\\GeoNames_Lab\\dumps\\allCountries\\allCountries.txt'
+LOAD DATA LOCAL INFILE '......\\GeoNames\\allCountries\\allCountries.txt'
 INTO TABLE `geo_allcountries`
 CHARACTER SET 'UTF8';
 

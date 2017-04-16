@@ -258,42 +258,42 @@ ALTER TABLE `geo_hierarchy` DISABLE KEYS;
 -- LOAD DATA / INSERT INTO
 -- 
 
-LOAD DATA LOCAL INFILE 'C:\\...\\GeoNames\\cities1000.txt'
+LOAD DATA LOCAL INFILE '...\\GeoNames\\cities1000.txt'
 INTO TABLE `geo_01cities1000`
 CHARACTER SET 'UTF8';
 
-LOAD DATA LOCAL INFILE 'C:\\...\\GeoNames\\cities5000.txt'
+LOAD DATA LOCAL INFILE '...\\GeoNames\\cities5000.txt'
 INTO TABLE `geo_02cities5000`
 CHARACTER SET 'UTF8';
 
-LOAD DATA LOCAL INFILE 'C:\\...\\GeoNames\\cities15000.txt'
+LOAD DATA LOCAL INFILE '...\\GeoNames\\cities15000.txt'
 INTO TABLE `geo_03cities15000`
 CHARACTER SET 'UTF8';
 
-LOAD DATA LOCAL INFILE 'C:\\...\\GeoNames\\countryInfo.txt'
+LOAD DATA LOCAL INFILE '...\\GeoNames\\countryInfo.txt'
 INTO TABLE `geo_countryinfo`
 CHARACTER SET 'UTF8'
 IGNORE 51 LINES;
 
-LOAD DATA LOCAL INFILE 'C:\\...\\GeoNames\\featureCodes_en.txt'
+LOAD DATA LOCAL INFILE '...\\GeoNames\\featureCodes_en.txt'
 INTO TABLE `geo_featurecodes`
 CHARACTER SET 'UTF8';
 
 INSERT INTO `geo_continentcodes` VALUES ('AF','Africa',6255146),('AS','Asia',6255147),('EU','Europe',6255148),('NA','North America',6255149),('OC','Oceania',6255151),('SA','South America',6255150),('AN','Antarctica',6255152);
 
-LOAD DATA LOCAL INFILE 'C:\\...\\GeoNames\\admin1CodesASCII.txt'
+LOAD DATA LOCAL INFILE '...\\GeoNames\\admin1CodesASCII.txt'
 INTO TABLE `geo_admin1codesascii`
 CHARACTER SET 'UTF8';
 
-LOAD DATA LOCAL INFILE 'C:\\...\\GeoNames\\admin2Codes.txt'
+LOAD DATA LOCAL INFILE '...\\GeoNames\\admin2Codes.txt'
 INTO TABLE `geo_admin2codes`
 CHARACTER SET 'UTF8';
 
-LOAD DATA LOCAL INFILE 'C:\\...\\GeoNames\\PostalCodes\\allCountries.txt'
+LOAD DATA LOCAL INFILE '...\\GeoNames\\PostalCodes\\allCountries.txt'
 INTO TABLE `geo_postalcodes`
 CHARACTER SET 'UTF8';
 
-LOAD DATA LOCAL INFILE 'C:\\...\\GeoNames\\hierarchy.txt'
+LOAD DATA LOCAL INFILE '...\\GeoNames\\hierarchy.txt'
 INTO TABLE `geo_hierarchy`
 CHARACTER SET 'UTF8';
 

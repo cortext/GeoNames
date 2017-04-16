@@ -10,7 +10,7 @@ Download and unzip dumps according to your needs.
 * [download.geonames.org/export/dump/cities15000.zip](http://download.geonames.org/export/dump/cities15000.zip)
 
 All GeoNames information should be relevant or not for you. By using cities tables (instead of allCountries table), you will upload only feature classes that are at least a small village (to a large metropole as a capital) with information on the population.
-Data between this three table are redondante (cities in cities5000 are also in cities1000).
+Data between this three tables are redondante (cities in cities5000 are also in cities1000).
 
 **First 10 feature classes in the cities1000 table**
 ```sql
@@ -44,15 +44,19 @@ P | PPLG | 14 | seat of government of a political entity
 * [download.geonames.org/export/dump/admin2Codes.txt](http://download.geonames.org/export/dump/admin2Codes.txt)
 * [download.geonames.org/export/dump/hierarchy.zip](http://download.geonames.org/export/dump/hierarchy.zip)
 
+To create the data model and upload the data (without allcountries table), use the [first sql scriptGeoNames_01_create_db](GeoNames_01_create_db.sql). Pay attention: 
+* you will have warnings for the **elevation** column in the three tables for cities due to missing values. As we are using NOT NULL as default, the column elevation will receive '0' instead of having a missing value. You may change this behaviour. 
+* we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may concider using utf8mb4.
+* The data engine used here is MYISAM. Change this according to your Data management system.
 ### Unsing zip/postal codes
 * [download.geonames.org/export/zip/allCountries.zip](http://download.geonames.org/export/zip/allCountries.zip)
 
 Note: you will find all the regular expressions to collect zip codes in the table countryinfo in the two colomns: 
-* **postalCodeRegex** : list of all the detailled regular expressions by countries (if exists) to collect postal / zip codes
+* **postalCodeRegex** : list of all the detailed regular expressions by countries (if exists) to collect postal / zip codes
 * **postalCodeFormat** : basic patterns of the postal / zip codes 
 
 ## Set up all feature classes
-For those who want all information, you can download, unzip, and build a table with all geonames feature classes. This table will have the same structure than cities1000, cities5000 and cities15000, and share some of information that are also listed in these three tables. 
+For those who want all information, you can download, unzip, and build a table with all geonames feature classes. This table will have the same structure than cities1000, cities5000 and cities15000, and share some of information that is also listed in these three tables. 
 * [download.geonames.org/export/dump/allCountries.zip](http://download.geonames.org/export/dump/allCountries.zip)
 
 **First 10 feature classes in the allcountries table**
@@ -81,8 +85,13 @@ S | CH | 246 672 | church
 S | HTL | 241 482 | hotel
 H | STMI | 200 196 | intermittent stream
 
+To add the allcountries table to the data model, use the [second sql GeoNames_02_allcountries](GeoNames_02_allcountries.sql).
+
 Pay attention, allcountries table:
-* store more thant 1.5 go of information (without indexes)
+* store more than 1.5 go of information (without indexes)
 * all feature classes are in it (for some uses, it can add a lot of false positives)
+* you will have warnings for the **elevation** column due to missing values. As we are using NOT NULL as default, the column elevation will receive '0' instead of having a missing value. You may want to change this behaviour. 
+* we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may concider using utf8mb4.
+* The data engine used here is MYISAM. Change this according to your Data management system.
 ##  Excluded dumps
 * alternateNames.zip (>100mo) alternative names for all the populated places (from allCountries.zip)
