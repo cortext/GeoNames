@@ -42,7 +42,7 @@ P.PPLG | 14 | seat of government of a political entity
 * [download.geonames.org/export/dump/hierarchy.zip](http://download.geonames.org/export/dump/hierarchy.zip)
 
 To create the data model and upload the data (without allcountries table), use the [first sql scriptGeoNames_01_create_db](GeoNames_01_create_db.sql). Pay attention: 
-* you will have warnings for the **elevation** column in the three tables for cities due to missing values. As we are using NOT NULL as default, the column elevation will receive '0' instead of having a missing value. You may change this behaviour. 
+* you will have warnings for the `**elevation**` column in the three tables for cities due to missing values. As we are using `NOT NULL` as default, the column elevation will receive '0' instead of having a missing value. You may change this behaviour. 
 * we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may consider using utf8mb4 (especially for alternateNames table or alternatenames columns).
 * The data engine used here is MYISAM. Change this according to your Data management system.
 ### Unsing zip/postal codes
@@ -53,7 +53,7 @@ Note: you will find all the regular expressions to collect zip codes in the tabl
 * **postalCodeFormat** : basic patterns of the postal / zip codes 
 
 ## Set up all feature classes
-For those who want all information, you can download, unzip, and build a table with all geonames feature classes. This table will have the same structure than cities1000, cities5000 and cities15000, and share some of information that is also listed in these three tables. 
+For those who want all information, you can download, unzip, and build a table with all geonames feature classes. This table have the same structure than cities1000, cities5000 and cities15000, and share some of information that is also listed in these three tables. 
 * [download.geonames.org/export/dump/allCountries.zip](http://download.geonames.org/export/dump/allCountries.zip)
 
 **First 10 feature classes in the allcountries table**
@@ -84,11 +84,11 @@ To add the allcountries table to the data model, use the [second sql GeoNames_02
 Pay attention, allcountries table:
 * store more than 2.5 go of information (with indexes)
 * all feature classes are in it (for some uses, it can add a lot of false positives)
-* you will have warnings for the **elevation** column due to missing values. As we are using default NOT NULL, the column elevation will receive '0' instead of having a missing value. You may want to change this behaviour. 
+* you will have warnings for the `**elevation**` column due to missing values. As we are using default `NOT NULL`, the column elevation will receive '0' instead of having a missing value. You may want to change this behaviour. 
 * we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may consider using utf8mb4 (especially for alternateNames table or alternatenames columns).
 * The data engine used here is MYISAM. Change this according to your Data management system.
 ## Added variables
-The SQL scripts will add one column (and an index) to the raw GeoNames data model: fclasscode, to make you able to directly link the three cities tables and the allcountries table with the fclasscode table, without having to concatenat fclass and fclass. In other words to find easily feature classes labels for these tables.
+The SQL scripts will add one column (and an index) to the raw GeoNames data model: `fclasscode`, to make you able to directly link the three cities tables and the allcountries table with the `fclasscode` table, without having to concatenat `fclass` and `fclass`. In other words to find easily feature classes labels for these tables.
 
 In the `allcountries` table with all GeoNames Id, some feature codes are missing (in the featurecodes classification) or are not enough detailed (information is available only at the class level). 
 ```sql
