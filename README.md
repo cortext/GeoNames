@@ -116,7 +116,7 @@ S.ARCHV | 	10 |
 A. | 	4 | 	
 S.TRAM | 	3 | 	
 
-For the classes and the feature codes listed above (except for S.ARCHV and S.TRAM), the fclasscode is filed by an empty value '':
+For the classes and the feature codes listed above (except for S.ARCHV and S.TRAM, assuming it may change between version), the fclasscode is filed by an empty value '':
 ```sql
 UPDATE `geo_allcountries` 
 SET  `fclasscode` = ''

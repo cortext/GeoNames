@@ -308,31 +308,16 @@ CHARACTER SET 'UTF8';
 -- Adding variables
 -- 
 
-ALTER TABLE `geo_01cities1000` 
-ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
+ALTER TABLE `geo_01cities1000` ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
+ALTER TABLE `geo_02cities5000` ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
+ALTER TABLE `geo_03cities15000` ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
 
-ALTER TABLE `geo_02cities5000` 
-ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
-
-ALTER TABLE `geo_03cities15000` 
-ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
-
-UPDATE `geo_01cities1000` 
-SET 
-    `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
-	
-UPDATE `geo_02cities5000` 
-SET 
-    `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
-	
-UPDATE `geo_03cities15000` 
-SET 
-    `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
+UPDATE `geo_01cities1000` SET `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
+UPDATE `geo_02cities5000` SET `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
+UPDATE `geo_03cities15000` SET `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
 	
 ALTER TABLE `geo_01cities1000` ADD INDEX `fclasscode` (`fclasscode` ASC);
-
 ALTER TABLE `geo_02cities5000` ADD INDEX `fclasscode` (`fclasscode` ASC);
-
 ALTER TABLE `geo_03cities15000` ADD INDEX `fclasscode` (`fclasscode` ASC);
 
 -- ---------------------------------------------------------------------------------
