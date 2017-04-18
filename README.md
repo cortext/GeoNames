@@ -46,7 +46,7 @@ P | PPLG | 14 | seat of government of a political entity
 
 To create the data model and upload the data (without allcountries table), use the [first sql scriptGeoNames_01_create_db](GeoNames_01_create_db.sql). Pay attention: 
 * you will have warnings for the **elevation** column in the three tables for cities due to missing values. As we are using NOT NULL as default, the column elevation will receive '0' instead of having a missing value. You may change this behaviour. 
-* we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may concider using utf8mb4.
+* we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may consider using utf8mb4 (especially for alternateNames table or alternatenames columns).
 * The data engine used here is MYISAM. Change this according to your Data management system.
 ### Unsing zip/postal codes
 * [download.geonames.org/export/zip/allCountries.zip](http://download.geonames.org/export/zip/allCountries.zip)
@@ -90,8 +90,8 @@ To add the allcountries table to the data model, use the [second sql GeoNames_02
 Pay attention, allcountries table:
 * store more than 2.5 go of information (with indexes)
 * all feature classes are in it (for some uses, it can add a lot of false positives)
-* you will have warnings for the **elevation** column due to missing values. As we are using NOT NULL as default, the column elevation will receive '0' instead of having a missing value. You may want to change this behaviour. 
-* we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may concider using utf8mb4.
+* you will have warnings for the **elevation** column due to missing values. As we are using default NOT NULL, the column elevation will receive '0' instead of having a missing value. You may want to change this behaviour. 
+* we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may consider using utf8mb4 (especially for alternateNames table or alternatenames columns).
 * The data engine used here is MYISAM. Change this according to your Data management system.
 ##  Excluded dumps
 * alternateNames.zip (>100mo) alternative names for all the populated places (from allCountries.zip)
