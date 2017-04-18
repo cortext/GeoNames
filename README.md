@@ -88,7 +88,7 @@ H | STMI | 200 196 | intermittent stream
 To add the allcountries table to the data model, use the [second sql GeoNames_02_allcountries](GeoNames_02_allcountries.sql).
 
 Pay attention, allcountries table:
-* store more than 1.5 go of information (without indexes)
+* store more than 2.5 go of information (with indexes)
 * all feature classes are in it (for some uses, it can add a lot of false positives)
 * you will have warnings for the **elevation** column due to missing values. As we are using NOT NULL as default, the column elevation will receive '0' instead of having a missing value. You may want to change this behaviour. 
 * we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may concider using utf8mb4.
