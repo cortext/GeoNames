@@ -88,10 +88,9 @@ Pay attention, allcountries table:
 * we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may consider using utf8mb4 (especially for alternateNames table or alternatenames columns).
 * The data engine used here is MYISAM. Change this according to your Data management system.
 ## Added variables
-The SQL scripts will add one column (and an index) to the raw GeoNames data model: fclasscode, to make you able to directly link the three cities tables and the allcountries table with the fclasscode table, without having to concatenat fclass and fclass.
+The SQL scripts will add one column (and an index) to the raw GeoNames data model: fclasscode, to make you able to directly link the three cities tables and the allcountries table with the fclasscode table, without having to concatenat fclass and fclass. In other words to find easily feature classes labels for these tables.
 
-In other words to find easily feature classes labels for these tables.
-
+In the `allcountries` with all GeoNames Id, some feature codes are missing (in the featurecodes classification) or are not enough detailed (information is available only at the class level). 
 ```sql
 SELECT 
     a.fclasscode, COUNT(a.geonameid) AS NbGeoNamesId, b.name
@@ -117,7 +116,7 @@ S.ARCHV | 	10 |
 A. | 	4 | 	
 S.TRAM | 	3 | 	
 
-Some of the geonameid do not have well-structured feature codes (to be used in the link with the featurecodes classification), for the classes listed above, the fclasscode is filed by an empty value '':
+For the classes and the feature codes listed above (except for S.ARCHV and S.TRAM), the fclasscode is filed by an empty value '':
 ```sql
 UPDATE `geo_allcountries` 
 SET  `fclasscode` = ''
