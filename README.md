@@ -15,28 +15,25 @@ Data between this three tables are redondante (cities in cities5000 are also in 
 **First 10 feature classes in the cities1000 table**
 ```sql
 SELECT 
-    a.fclass, a.fcode, COUNT(a.geonameid) AS NbGeoNamesId, b.name
+    a.fclasscode, COUNT(a.geonameid) AS NbGeoNamesId, b.name
 FROM
-    geo_01cities1000 AS a,
-    geo_featurecodes AS b
-WHERE
-    b.code = CONCAT(a.fclass, '.', a.fcode)
-GROUP BY a.fclass , a.fcode
+    geo_01cities1000 AS a INNER JOIN geo_featurecodes AS b ON a.fclasscode = b.code
+GROUP BY a.fclasscode
 ORDER BY NbGeoNamesId DESC
 LIMIT 0,10;
 ```
-fclass | fcode | NbGeoNamesId | name
+fclasscode | NbGeoNamesId | name
 --- | --- | --- | ---
-P | PPL | 69 408 | populated place
-P | PPLA3 | 27 195 | seat of a third-order administrative division
-P | PPLA4 | 26 600 | seat of a fourth-order administrative division
-P | PPLA2 | 16 160 | seat of a second-order administrative division
-P | PPLA | 3 483 | seat of a first-order administrative division
-P | PPLX | 2 336 | section of populated place
-P | PPLC | 242 | capital of a political entity
-P | PPLL | 239 | populated locality
-P | PPLQ | 19 | abandoned populated place
-P | PPLG | 14 | seat of government of a political entity
+P.PPL | 69 408 | populated place
+P.PPLA3 | 27 195 | seat of a third-order administrative division
+P.PPLA4 | 26 600 | seat of a fourth-order administrative division
+P.PPLA2 | 16 160 | seat of a second-order administrative division
+P.PPLA | 3 483 | seat of a first-order administrative division
+P.PPLX | 2 336 | section of populated place
+P.PPLC | 242 | capital of a political entity
+P.PPLL | 239 | populated locality
+P.PPLQ | 19 | abandoned populated place
+P.PPLG | 14 | seat of government of a political entity
 
 * [download.geonames.org/export/dump/featureCodes_en.txt](http://download.geonames.org/export/dump/featureCodes_en.txt)
 * [download.geonames.org/export/dump/countryInfo.txt](http://download.geonames.org/export/dump/countryInfo.txt)
@@ -62,28 +59,25 @@ For those who want all information, you can download, unzip, and build a table w
 **First 10 feature classes in the allcountries table**
 ```sql
 SELECT 
-    a.fclass, a.fcode, COUNT(a.geonameid) AS NbGeoNamesId, b.name
+    a.fclasscode, COUNT(a.geonameid) AS NbGeoNamesId, b.name
 FROM
-    geo_allcountries AS a,
-    geo_featurecodes AS b
-WHERE
-    b.code = CONCAT(a.fclass, '.', a.fcode)
-GROUP BY a.fclass , a.fcode
+    geo_allcountries AS a INNER JOIN geo_featurecodes AS b ON a.fclasscode = b.code
+GROUP BY a.fclasscode
 ORDER BY NbGeoNamesId DESC
 LIMIT 0,10;
 ```
-fclass | fcode | NbGeoNamesId | name
---- | --- | --- | ---
-P | PPL | 4 100 754 | populated place
-H | STM | 862 859 | stream
-T | MT | 391 873 | mountain
-T | HLL | 367 942 | hill
-S | FRM | 322 320 | farm
-S | SCH | 278 728 | school
-H | LK | 266 213 | lake
-S | CH | 246 672 | church
-S | HTL | 241 482 | hotel
-H | STMI | 200 196 | intermittent stream
+fclasscode | NbGeoNamesId | name
+--- | --- | ---
+P.PPL | 4 100 754 | populated place
+H.STM | 862 859 | stream
+T.MT | 391 873 | mountain
+T.HLL | 367 942 | hill
+S.FRM | 322 320 | farm
+S.SCH | 278 728 | school
+H.LK | 266 213 | lake
+S.CH | 246 672 | church
+S.HTL | 241 482 | hotel
+H.STMI | 200 196 | intermittent stream
 
 To add the allcountries table to the data model, use the [second sql GeoNames_02_allcountries](GeoNames_02_allcountries.sql).
 
@@ -93,5 +87,43 @@ Pay attention, allcountries table:
 * you will have warnings for the **elevation** column due to missing values. As we are using default NOT NULL, the column elevation will receive '0' instead of having a missing value. You may want to change this behaviour. 
 * we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may consider using utf8mb4 (especially for alternateNames table or alternatenames columns).
 * The data engine used here is MYISAM. Change this according to your Data management system.
+## Added variables
+The SQL scripts will add one column (and an index) to the raw GeoNames data model: fclasscode, to make you able to directly link the three cities tables and the allcountries table with the fclasscode table, without having to concatenat fclass and fclass.
+
+In other words to find easily feature classes labels for these tables.
+
+```sql
+SELECT 
+    a.fclasscode, COUNT(a.geonameid) AS NbGeoNamesId, b.name
+FROM
+    geo_allcountries AS a
+        LEFT JOIN
+    geo_featurecodes AS b ON a.fclasscode = b.code
+WHERE
+    b.code IS NULL
+GROUP BY a.fclasscode;
+```
+fclasscode | NbGeoNamesId | name
+--- | --- | ---
+S. | 89591 | 	
+. | 5076 | 	
+H. | 497 | 	
+U. | 194 | 	
+L. | 31 | 	
+P. | 30 | 	
+R. | 12 | 	
+T. | 11 | 	
+S.ARCHV | 	10 | 	
+A. | 	4 | 	
+S.TRAM | 	3 | 	
+
+Some of the geonameid do not have well-structured feature codes (to be used in the link with the featurecodes classification), for the classes listed above, the fclasscode is filed by an empty value '':
+```sql
+UPDATE `geo_allcountries` 
+SET  `fclasscode` = ''
+WHERE
+    `fclasscode` NOT REGEXP '[A-Z]{1}.[A-Z]{1,5}';
+```
+
 ##  Excluded dumps
 * alternateNames.zip (>100mo) alternative names for all the populated places (from allCountries.zip)

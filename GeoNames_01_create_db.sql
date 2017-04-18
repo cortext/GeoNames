@@ -279,7 +279,14 @@ LOAD DATA LOCAL INFILE '...\\GeoNames\\featureCodes_en.txt'
 INTO TABLE `geo_featurecodes`
 CHARACTER SET 'UTF8';
 
-INSERT INTO `geo_continentcodes` VALUES ('AF','Africa',6255146),('AS','Asia',6255147),('EU','Europe',6255148),('NA','North America',6255149),('OC','Oceania',6255151),('SA','South America',6255150),('AN','Antarctica',6255152);
+INSERT INTO `geo_continentcodes` VALUES 
+	('AF','Africa',6255146),
+	('AS','Asia',6255147),
+	('EU','Europe',6255148),
+	('NA','North America',6255149),
+	('OC','Oceania',6255151),
+	('SA','South America',6255150),
+	('AN','Antarctica',6255152);
 
 LOAD DATA LOCAL INFILE '...\\GeoNames\\admin1CodesASCII.txt'
 INTO TABLE `geo_admin1codesascii`
@@ -296,6 +303,37 @@ CHARACTER SET 'UTF8';
 LOAD DATA LOCAL INFILE '...\\GeoNames\\hierarchy.txt'
 INTO TABLE `geo_hierarchy`
 CHARACTER SET 'UTF8';
+
+-- ---------------------------------------------------------------------------------
+-- Adding variables
+-- 
+
+ALTER TABLE `geo_01cities1000` 
+ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
+
+ALTER TABLE `geo_02cities5000` 
+ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
+
+ALTER TABLE `geo_03cities15000` 
+ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
+
+UPDATE `geo_01cities1000` 
+SET 
+    `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
+	
+UPDATE `geo_02cities5000` 
+SET 
+    `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
+	
+UPDATE `geo_03cities15000` 
+SET 
+    `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
+	
+ALTER TABLE `geo_01cities1000` ADD INDEX `fclasscode` (`fclasscode` ASC);
+
+ALTER TABLE `geo_02cities5000` ADD INDEX `fclasscode` (`fclasscode` ASC);
+
+ALTER TABLE `geo_03cities15000` ADD INDEX `fclasscode` (`fclasscode` ASC);
 
 -- ---------------------------------------------------------------------------------
 -- ENABLE KEYS

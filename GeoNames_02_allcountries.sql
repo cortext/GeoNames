@@ -69,6 +69,24 @@ INTO TABLE `geo_allcountries`
 CHARACTER SET 'UTF8';
 
 -- ---------------------------------------------------------------------------------
+-- Adding variables
+-- 
+
+ALTER TABLE `geo_allcountries` 
+ADD COLUMN `fclasscode` CHAR(7) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL AFTER `fcode`;
+
+UPDATE `geo_allcountries` 
+SET 
+    `fclasscode` = CONCAT(`fclass`, '.', `fcode`);
+
+UPDATE `geo_allcountries` 
+SET  `fclasscode` = ''
+WHERE
+    `fclasscode` NOT REGEXP '[A-Z]{1}.[A-Z]{1,5}';
+	
+ALTER TABLE `geo_allcountries` ADD INDEX `fclasscode` (`fclasscode` ASC);
+
+-- ---------------------------------------------------------------------------------
 -- ENABLE KEYS Section
 -- 
 
