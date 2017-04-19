@@ -88,7 +88,7 @@ Pay attention, allcountries table:
 * we are using CHARSET=utf8 COLLATE utf8_unicode_ci. You may consider using utf8mb4 (especially for alternateNames table or alternatenames columns).
 * The data engine used here is MYISAM. Change this according to your Data management system.
 ## Added variables
-The SQL scripts will add one column (and an index) to the raw GeoNames data model: `fclasscode`, to make you able to directly link the three cities tables and the allcountries table with the `fclasscode` table, without having to concatenat `fclass` and `fclass`. In other words to find easily feature classes labels for these tables.
+The SQL scripts will add one column (and an index) to the raw GeoNames data model: `fclasscode`, to make you able to directly link the three cities tables and the allcountries table with the `fclasscode` table, without having to concatenat `fclass` and `fcode`. In other words to find easily feature classes labels for these tables.
 
 In the `allcountries` table with all GeoNames Id, some feature codes are missing (in the featurecodes classification) or are not enough detailed (information is available only at the class level). 
 ```sql
